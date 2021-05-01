@@ -1,0 +1,25 @@
+version: "3.0"  
+
+services:
+  vuejs-ui:
+    image: vuejs:latest
+    build: 
+      context: .
+      dockerfile: ./infra/vuejs.dockerfile
+    container_name: vuejs-ui
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./frontend:/src
+  vuejs:
+    image: vuejs:latest
+    build:
+      context: .
+      dockerfile: ./infra/vuejs.dockerfile
+    container_name: vuejs
+    command: "yarn serve"
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+    volumes:
+      - ./frontend:/src
